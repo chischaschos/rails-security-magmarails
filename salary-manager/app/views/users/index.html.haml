@@ -4,6 +4,7 @@
   %thead
     %tr
       %th Email
+      %th Site
       %th Role
       %th Salary
       %th Actions
@@ -11,6 +12,7 @@
   - @users.each do |user|
     %tr
       %td= link_to user.email, user
+      %td= raw user.site
       %td= user.role.title.capitalize
       %td= user.salary.amount
       %td
