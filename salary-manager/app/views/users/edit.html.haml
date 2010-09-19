@@ -1,0 +1,10 @@
+= link_to 'Back', users_path
+= form_for :user, @user, :url => users_path do |f|
+  %fieldset
+    %legend Editing user
+    = render :partial => 'form', :locals => {:user => @user, :form => f}
+    %button.button.positive{:type => 'submit'}    
+      Save
+      = image_tag('buttons/key.png')
+= link_to 'Show', @user
+= link_to 'Back', users_path

@@ -7,7 +7,7 @@
 * Esteban is going nuts, he can not handle his company salaries and raises process.
 * He contacts you and ask you to build a quite simple application
 
-!SLIDE bullets incremental
+!SLIDE  smaller bullets incremental
 # The Specs #
 
 * Target audience is an small company with about 50 employees.
@@ -20,24 +20,31 @@
 * Human resources can view all employee salaries.
 * Manager can view everyone salaries.
     
-!SLIDE incremental
+!SLIDE bullets incremental
 # And you build it! #
 
-Awesome, the application works. Everyone is happy. That's it right?
+* Awesome, the application works. Everyone is happy. That's it right?
  
 !SLIDE bullets incremental
 # Day 1 - Injection #
 
 * Esteban morning call. One employe automagically raised his own salary and was fired... so fix it.
-* After analyzing logs and doing some research, you found that that user used a Injection attack. He modified the query string adding and update statement.
-* Sanitize input:
-  * Use whitelist validation
-    * Use find, find_by 
-    * If you need SQL fragments use:
-    * An array of sanitized tainted strings
-      * Pass a hash
 
 !SLIDE bullets incremental
-# Day 2 - Cross-Site Scripting(XSS) #
+#Did some research#
+
+* You found that that user used an Injection attack. He modified the query string adding and update statement.
+
+!SLIDE bullets incremental
+#Sanitize input#
+
+* Use whitelist validation
+* Use find, find_by 
+ * If you need SQL fragments use:
+  * An array of sanitized tainted strings
+  * Pass a hash
+
+!SLIDE bullets incremental
+#Day 2 - Cross-Site Scripting(XSS)#
 
 * Esteban morning call.

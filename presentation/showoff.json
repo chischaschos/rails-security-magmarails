@@ -1,8 +1,7 @@
 { 
   "name": "Web Security With Rails", 
   "sections": [ 
-    {
-      "section":"one"
-    } 
+    {"section": "one"},
+    {"section": "two"} 
   ]
 }

@@ -1,0 +1,23 @@
+- if user.errors.any?
+  .error
+    %ul
+      %li.title= %{#{pluralize(user.errors.count, 'error')} prohibited}
+      - user.errors.full_messages.each do |msg|
+        %li= msg
+%p.span-12
+  = form.label :email
+%p.span-12.last
+  = form.text_field :email
+%p.span-12
+  = form.label :password
+%p.span-12.last
+  = form.text_field :password
+= form.fields_for :salary do |salary_form|
+  %p.span-12
+    = salary_form.label :amount
+  %p.span-12.last
+    = salary_form.text_field :amount
+%p.span-12
+  = form.label 'Select a role'
+%p.span-12.last
+  = form.collection_select(:role_id, Role.all, :id, :title, { :prompt => 'Select a role' })
