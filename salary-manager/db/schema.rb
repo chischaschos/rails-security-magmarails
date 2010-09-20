@@ -10,11 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918223927) do
+ActiveRecord::Schema.define(:version => 20100920210921) do
 
-  create_table "raise_histories", :force => true do |t|
+  create_table "raises", :force => true do |t|
     t.float    "request_amount"
     t.boolean  "is_approved"
+    t.integer  "user_id"
+    t.integer  "approver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

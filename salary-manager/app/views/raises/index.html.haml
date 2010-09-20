@@ -1,0 +1,21 @@
+%h1 Listing users
+
+%table
+  %thead
+    %tr
+      %th Status
+      %th Amount
+      %th Created On
+      %th Updated On
+      %th Approved by
+      %th Actions
+  %tbody
+  - @raises.each do |item|
+    %tr
+      %td= item.is_approved ? 'Yes' : 'No'
+      %td= item.request_amount
+      %td= item.created_at
+      %td= item.updated_at
+      %td= item.approver.email if item.approver
+      %td
+        = link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete

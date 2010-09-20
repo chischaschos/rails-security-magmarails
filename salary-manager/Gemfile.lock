@@ -32,6 +32,7 @@ GEM
       activesupport (~> 3.0.0)
     bcrypt-ruby (2.1.2)
     builder (2.1.2)
+    cgi_multipart_eof_fix (2.5.0)
     columnize (0.3.1)
     compass (0.10.5)
       haml (>= 3.0.4)
@@ -43,12 +44,15 @@ GEM
       term-ansicolor (~> 1.0.4)
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
+    daemons (1.1.0)
     devise (1.1.2)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 0.10.7)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    fastthread (1.0.7)
+    gem_plugin (0.2.3)
     gherkin (2.1.5)
       trollop (~> 1.16.2)
     haml (3.0.18)
@@ -66,6 +70,11 @@ GEM
       mime-types
       treetop (>= 1.4.5)
     mime-types (1.16)
+    mongrel (1.1.5)
+      cgi_multipart_eof_fix (>= 2.4)
+      daemons (>= 1.0.3)
+      fastthread (>= 1.0.1)
+      gem_plugin (>= 0.2.3)
     nokogiri (1.4.3.1)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -131,6 +140,7 @@ DEPENDENCIES
   haml-rails
   hpricot
   jquery-rails
+  mongrel
   rails (= 3.0.0)
   rspec-rails (>= 2.0.0.beta.22)
   ruby-debug
