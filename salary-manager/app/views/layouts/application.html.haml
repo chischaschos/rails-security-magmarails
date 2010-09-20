@@ -14,5 +14,7 @@
   %body.container
     .menu.span-24.last= render 'menu/menu'
     .workarea.span-24.last= yield
-    .notice.span-24.last= notice
-    .error.span-24.last= alert
+    - if flash[:notice].present? && !flash[:notice].blank?
+      .notice.span-24.last= notice
+    - if flash[:alert].present?  && !flash[:alert].blank?
+      .error.span-24.last= alert

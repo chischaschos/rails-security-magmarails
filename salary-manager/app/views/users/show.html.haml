@@ -1,15 +1,15 @@
 = form_for(@user) do |form|
   %fieldset
     %legend Showing User
-    %p.span-12
+    .span-4
       = form.label :email
-    %p.span-12.last= @user.email
-    %p.span-12
-      = form.label :password
-    %p.span-12.last= @user.password
-    %p.span-12
+    .span-16.last= @user.email
+    .span-4
+      = form.label :salary
+    .span-16.last= @user.salary.amount
+    .span-4
       = form.label 'User role'
-    %p.span-12.last= @user.role.title.capitalize
+    .span-16.last= @user.role.title.capitalize
 
 = link_to 'Edit', edit_user_path(@user)
 = link_to 'Back', users_path
