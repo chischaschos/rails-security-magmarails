@@ -1,6 +1,6 @@
 #Purpose#
 The purpose of this project is hold the documentation, examples and presentation 
-from *Magma Rails* upcoming conference *Rails Web Security*.
+from [Magma Rails](http://www.magmarails.com/) upcoming conference *Rails Web Security*.
 
 #Expected expertise#
 Beginner-Medium
