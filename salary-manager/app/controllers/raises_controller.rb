@@ -27,7 +27,12 @@ class RaisesController < ApplicationController
     elsif current_user.role.title == 'admin'
       @raises = Raise.all
     else
-      @raises = Raise.where(["user_id = ?", current_user])
+      if params[:search_raise].present?
+        @raises = Raise.where(["user_id = #{current_user.id} and request_amount = #{params[:search_raise]}"])
+        #@raises = Raise.where(["user_id = ? and request_amount = ?", current_user, params[:search_raise]])
+      else
+        @raises = Raise.where(["user_id = ?", current_user])
+      end
     end
   end
 

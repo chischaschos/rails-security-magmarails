@@ -1,8 +1,25 @@
 !SLIDE 
-# Web Security With Rails #
+#Web Security With Rails#
 
 !SLIDE bullets incremental
-# The Application #
+
+* Frameworks are neither secure or insecure
+* Depends on the developers
+* And how these developers use/implement the frameworks
+
+!SLIDE bullets incremental
+
+* Rails follows conventions
+* By default Rails is secure in many ways
+* Let's see a use case
+
+!SLIDE bullets incremental
+#Disclaimer#
+
+* In order to test some insecurities I had to fix it and make it insecure
+
+!SLIDE bullets incremental
+# The Test Application #
 
 * Some guy is going nuts, he can not handle his company salaries and raises process.
 * He contacts you and ask you to build a quite simple application
@@ -16,25 +33,31 @@
 # Day 1 - Injection #
 
 * Early morning call from your customer.
-* One employe automagically raised his own salary and was fired... so fix it.
+* Some employees are complainning about others salary, how do they know how much others are gaining?
 
 !SLIDE small incremental bullets
 #Did some research#
 
 - You found that that a user used an Injection attack. He modified the query string adding and update statement.
-- Query: javascript:alert(escape('1; UPDATE salaries SET amount = 123456789 WHERE user_id = 3;'))
-- GET /raises/1
-- GET /users/1%3B%20UPDATE%20salaries%20SET%20amount%20%3D%20123456789%20WHERE%20user_id%20%3D%203%3B
+- Query: javascript:alert(escape('1 OR 1=1'))
+- http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=12
+- http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=1+OR+1%3D1
+
+!SLIDE small incremental bullets
+#Two basic errors#
+
+* Wrong session and roles handling
+* SQL Injection
 
 !SLIDE bullets incremental small
 #The fix#
 
 * Previously had:
- * @user = User.find(:all, :conditions => "id = #{params[:id]}").first
+ * @raises = Raise.where(["user_id = #{current_user.id} and request_amount = #{params[:search_raise]}"])
 * Now he have:
- * @user = User.find(params[:id])
+ * @raises = Raise.where(["user_id = ? and request_amount = ?", current_user, params[:search_raise]])
 * We could also create a constraint for that route
- * get '/(:options)', :to => 'raises#index', :as => 'raises', :constraints => {:options => /\w{5}/}
+ * get '/search/:query', :to => 'raises#index', :as => 'search', :constraints => {:options => /\d{5}/}
 
 !SLIDE bullets incremental
 #Sanitize input#
@@ -48,17 +71,21 @@
 
 * Default scape for ’ , " , NULL character and line breaks
 * Using Model.find(id) or Model.find_by_some thing(something)
+
+!SLIDE bullets incremental
+#RoR built-in filter...#
+
 * In SQL Fragments, specially in conditions fragments it has to be applied manually
-  * (:conditions => "...")
-  * connection.execute() 
-  * Model.find_by_sql() methods
+ * (:conditions => "...")
+ * connection.execute() 
+ * Model.find_by_sql() methods
 
 !SLIDE bullets incremental
 
 * Prefer:
-  * Model.find(:first, :conditions => ["login = ? AND password = ?", entered_user_name, entered_password])
-  * Model.find(:first, :conditions => {:login => entered_user_name, :password => entered_password})
-  * Automatically sanitize tainted variables
+ * Model.find(:first, :conditions => ["login = ? AND password = ?", entered_user_name, entered_password])
+ * Model.find(:first, :conditions => {:login => entered_user_name, :password => entered_password})
+ * Automatically sanitize tainted variables
 
 !SLIDE bullets incremental
 #Day 2 - Cross-Site Scripting(XSS)#
@@ -88,3 +115,6 @@
 
 * Use whitelist validation, black lists are never complete
 * validates_format_of :site, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+
+!SLIDE bullets incremental
+#Day 3 - Broken Authentication and Session Management#

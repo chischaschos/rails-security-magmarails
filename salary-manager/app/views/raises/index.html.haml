@@ -1,4 +1,11 @@
 %h1= @is_approval ? 'Approve Raise' : 'All Raises'
+.search
+  = form_tag '/raises/search', :method => :get do
+    = text_field_tag :search_raise
+    %button.button.positive{:type => 'submit'}    
+      Search by amount
+      = image_tag('buttons/tick.png')
+
 %table
   %thead
     %tr
