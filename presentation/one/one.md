@@ -4,22 +4,9 @@
 !SLIDE bullets incremental
 # The Application #
 
-* Esteban is going nuts, he can not handle his company salaries and raises process.
+* Some guy is going nuts, he can not handle his company salaries and raises process.
 * He contacts you and ask you to build a quite simple application
 
-!SLIDE  smaller bullets incremental
-# The Specs #
-
-* Target audience is an small company with about 50 employees.
-* This application helps everyone review their salaries and ask for a raise.
-* We have employees, human resources and one manager.
-* Everyone can see his current salary.
-* Everyone but the manager can ask for a raise.
-* Human resources approve or reject employee raises.
-* The manager approves Human resources raises.
-* Human resources can view all employee salaries.
-* Manager can view everyone salaries.
-    
 !SLIDE bullets incremental
 # And you build it! #
 

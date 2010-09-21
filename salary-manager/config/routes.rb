@@ -5,8 +5,9 @@ SalaryManager::Application.routes.draw do
   scope '/raises' do
     get 'new', :to => 'raises#new', :as => 'new_raise'
     post '/', :to => 'raises#create', :as => 'raises'
-    get '/', :to => 'raises#index', :as => 'raises'
+    get '/(:options)', :to => 'raises#index', :as => 'raises'
     delete '/:id', :to => 'raises#destroy', :as => 'raise'
+    put '/:id', :to => 'raises#update', :as => 'raise'
   end
 
   scope '/auth' do

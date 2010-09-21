@@ -21,7 +21,14 @@ class RaisesController < ApplicationController
   end
 
   def index
-    @raises = Raise.where(["user_id = ? ", current_user])
+    @is_approval = params[:options] == 'approve' 
+    if @is_approval && current_user.role.title == 'admin'
+      @raises = Raise.where(["is_approved <> ?", true])
+    elsif current_user.role.title == 'admin'
+      @raises = Raise.all
+    else
+      @raises = Raise.where(["user_id = ?", current_user])
+    end
   end
 
   def destroy
@@ -31,6 +38,20 @@ class RaisesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(raises_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def update
+    @raise = Raise.find(params[:id])
+
+    respond_to do |format|
+      if @raise.update_attributes(params[:user])
+        format.html { redirect_to(@raise, :notice => 'Raise approved.') }
+        format.xml  { head :ok }
+      else
+        format.html { redirect_to(@raise, :notice => 'Raise could not be approved. Errors occured.') }
+        format.xml  { render :xml => @raise.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
