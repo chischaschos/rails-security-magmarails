@@ -1,0 +1,30 @@
+em, strong, h1, h2, h3 {
+  font-weight: bold;
+}
+
+
+em {
+  color: green;
+  font-style: normal;
+}
+
+strong {
+  font-style: normal;
+  color: red;
+}
+
+h1 {
+  color: black;
+  font-size: 5em;
+}
+
+h2 {
+  color: blue;
+  font-size: 4em;
+}
+
+
+h3 {
+  font-size: 3.5em;
+  color: brown;
+}

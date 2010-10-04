@@ -1,35 +1,186 @@
 !SLIDE 
-#Web Security With Rails#
+.notes another dark side
+#Security in **Ruby on Rails**#
+
 
 !SLIDE bullets incremental
+## Intro ##
+* Creators put many *built-in* security features
+* In order to build *secure applications* we must *use* the built-in features *correctlty*
+* Most problem domains have their *own* set of *security rules* beyond what any framework can provide
 
-* Frameworks are neither secure or insecure
-* Depends on the developers
-* And how these developers use/implement the frameworks
-
-!SLIDE bullets incremental
-
-* Rails follows conventions
-* By default Rails is secure in many ways
-* Let's see a use case
 
 !SLIDE bullets incremental
-#Disclaimer#
+* Many companies *test applications for security* with help of:
+ * Special security teams
+ * Code reviews
 
-* In order to test some insecurities I had to fix it and make it insecure
-
-!SLIDE bullets incremental
-# The Test Application #
-
-* Some guy is going nuts, he can not handle his company salaries and raises process.
-* He contacts you and ask you to build a quite simple application
 
 !SLIDE bullets incremental
-# And you build it! #
+* But they have ...
+* Highly *expensive* projects with *big budgets*
+* *Security principles* should be applied with the same *agile principles* that **RoR** is built-on
 
-* Awesome, the application works. Everyone is happy. That's it right?
- 
+
 !SLIDE bullets incremental
+## Default rules  ##
+
+
+!SLIDE bullets incremental
+### Defense layers ###
+* Multiple *defense layers* deal with different *attack types*
+
+
+!SLIDE bullets incremental
+### Defense layers ###
+* *Network*, *Operating system*, *Web server*, *Web application* and *Database*
+
+
+!SLIDE bullets incremental
+### Your system is as **secure** as ... ###
+* The *wekest link*
+
+
+!SLIDE bullets incremental
+### You **better** ... ###
+* Follow a *Fail close* approach
+
+
+!SLIDE
+##**Discouraged**##
+	@@@ ruby
+	def show_invoice
+	  @invoice = User.invoices.find(params[:id])
+	  unless @invoice
+	    redirect :action => 'not_authorized'
+	  end
+	end
+
+
+!SLIDE
+##*Recommended*##
+	@@@ ruby
+	def show_invoice
+	  @invoice = User.invoices.find(params[:id])
+	  if @invoice
+	    redirect :action => 'authorized'
+	  else 
+	    redirect :action => 'not_authorized'
+	  end
+	end
+
+
+!SLIDE bullets incremental
+### Whitelisting ###
+
+
+!SLIDE
+## **Discouraged** ##
+	@@@ ruby
+	@non_valid_chars = %w{%<>'"/\}
+
+
+!SLIDE
+## **Recommended** ##
+	@@@ ruby
+	@valid_users = %w{pepe marco raul}
+
+
+!SLIDE bullets incremental
+### Least privilege ###
+* A user should be able to do as *little as possible* according domain requirements, **nothing else**
+
+
+!SLIDE bullets incremental
+### DRY ###
+* *Do not repeat yourself*
+* Focus on not **cutting pasting code**
+
+
+!SLIDE bullets incremental
+### Avoid complexity ###
+* *Complexity* is **bad**
+* As complexity grows, security risks too
+
+!SLIDE bullets incremental
+## Tamper data ##
+* Firefox plugin
+* [Download](https://addons.mozilla.org/en-US/firefox/addon/966/)
+
+
+!SLIDE bullets incremental
+## Exploits ##
+
+
+!SLIDE
+### Parameter Manipulation ##
+	@@@ html
+	<form accept-charset="UTF-8" action="/users" method="post">
+	<input id="user_email" name="user[email]" size="30" type="text" value="" />
+	<input id="user_password" name="user[password]" size="30" type="password" />
+	<input type="submit" value="Create" />
+	</form>
+
+
+!SLIDE
+    @@@ html
+    <select id="user_role_id" name="user[role_id]">
+
+
+!SLIDE bullets incremental
+* Here we see a tamper data screenshot...
+
+
+!SLIDE bullets incremental
+### Broken Authorization ###
+* Use *public* computer, you do not follow *log out* link and close browser. Another person *checks* that computer *browsing history*
+* http://localhost:3000/raises/approve/**12**
+
+
+!SLIDE bullets incremental
+### SQL Injection ###
+* What *address* is *search* going through ...
+* http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1000.00**
+* *Testing the waters*
+* http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1'**
+
+
+!SLIDE bullets incremental
+* Here we see error screen screenshot...
+
+
+!SLIDE
+### Lets scape or query ###
+    @@@ javascript
+    alert(escape('1 OR 1=1'))
+
+
+!SLIDE bullets incremental
+* http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1+OR+1%3D1**
+* *Surprise!*
+
+
+!SLIDE bullets incremental
+* Here we see a succesfull attack screen screenshot...
+
+
+!SLIDE bullets incremental
+### Cross-Site Scripting ###
+
+
+!SLIDE bullets incremental
+### Cross-Site Request Forgery ###
+
+
+!SLIDE bullets incremental
+### XSS vs CSRF ###
+* *XSS* exploits the trust a *client* has *for* a *site*
+* *CSRF* exploits the trust a *site* has for a *client*
+
+
+!SLIDE bullets incremental
+## Fixing exploits ##
+
 # Day 1 - Injection #
 
 * Early morning call from your customer.
@@ -117,4 +268,4 @@
 * validates_format_of :site, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 
 !SLIDE bullets incremental
-#Day 3 - Broken Authentication and Session Management#
+
