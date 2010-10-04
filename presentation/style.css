@@ -28,3 +28,20 @@ h3 {
   font-size: 3.5em;
   color: brown;
 }
+
+blockquote {
+  border : 2px solid #000;
+  background-color: #ccc;
+  quotes: "\201C" "\201D";
+}
+
+blockquote:before { 
+  content: open-quote; 
+  font-weight: bold; 
+}
+
+blockquote:after { 
+  content: close-quote; 
+  font-weight: bold; 
+
+}

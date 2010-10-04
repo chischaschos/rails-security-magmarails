@@ -22,7 +22,8 @@
       = salary_form.label :amount
     .span-16.last
       = salary_form.text_field :amount
-.span-4
-  = form.label 'Select a role'
-.span-16.last
-  = form.collection_select(:role_id, Role.all, :id, :title, { :prompt => 'Select a role' })
+-if current_user.role.title == 'admin'  
+  .span-4
+    = form.label 'Select a role'
+  .span-16.last
+    = form.collection_select(:role_id, Role.all, :id, :title, { :prompt => 'Select a role' })
