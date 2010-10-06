@@ -56,6 +56,14 @@
 
 !SLIDE bullets incremental
 ## Rails security ##
-* Creators put many *built-in* security features
-* In order to build *secure applications* we must *use* the built-in features *correctlty*
-* Most problem domains have their *own* set of *security rules* beyond what any framework can provide
+* **RoR** follows convention over configuration 
+ * Meaning it has many *built-in* security features
+* But...
+ * In order to build *secure applications* we must *use* these *built-in* features *correctlty*
+ * And we need to be aware of different attack types
+
+!SLIDE bullets incremental
+## ... ##
+* And in the end remember...
+ * Most problem domains have their *own* set of *security rules* 
+ * *Beyond* what any framework can provide
