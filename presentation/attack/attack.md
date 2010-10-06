@@ -19,6 +19,10 @@
 	</form>
 
 
+!SLIDE full-page
+![http://yuml.me/7635ae77](class_diagram.png)
+
+
 !SLIDE
     @@@ html
     <select id="user_role_id" name="user[role_id]">
@@ -33,12 +37,6 @@
 
 
 !SLIDE bullets incremental
-### Broken Authorization ###
-* Use *public* computer, you do not follow *log out* link and close browser. Another person *checks* that computer *browsing history*
-* http://localhost:3000/raises/approve/**12**
-
-
-!SLIDE bullets incremental
 ### SQL Injection ###
 * What *address* is *search* going through ...
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1000.00**
@@ -50,19 +48,29 @@
 ![Here we see an admits injection screenshot ...](admits_injection.png)
 
 
-!SLIDE
-### Lets scape a query snippet ###
-    @@@ javascript
-    alert(escape('1 OR 1=1'))
-
-
 !SLIDE bullets incremental
+* Lets modify the query string
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1+OR+1%3D1**
 * *Surprise!*
 
 
 !SLIDE full-page
 ![Here we see an succesful attack screen ...](raises1.png)
+
+
+!SLIDE bullets incremental
+### Broken Authorization ###
+* Parts/resouces of our application are usually restricted to different users
+* Some times logic behind access is flawed
+
+
+!SLIDE bullets incremental
+* Following with last example security flaw
+* Are we able to delete someone else raise petition?
+
+
+!SLIDE full-page
+![Here we see an succesful attack screen ...](raises2.png)
 
 
 !SLIDE bullets incremental small
@@ -103,6 +111,18 @@
         <a href="/users/2" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
       </td>
     </tr>
+
+
+!SLIDE commandline incremental
+### If this were the attacker server ###
+    $ tail -f /var/log/apache2/error.log 
+    [Wed Oct 06 13:40:39 2010] [error] [client 127.0.0.1] 
+    File does not exist: /var/www/_salary-manager_session
+    =BAh7CCIQX2NzcmZfdG9rZW4iMWhhNHZRUW0zRVRSZUQ3TlI3dXFI
+    NzQ3NFIwYm1FMGJhYXpNYXV4N0FpdFU9Ig9zZXNzaW9uX2lkIiVjN
+    GQyYjcwMmE5OWYxNDlmYzYyNzliYjlkNTBlZDUxMSIZd2FyZGVuLn
+    VzZXIudXNlci5rZXlbByIJVXNlcmkG--f5fd5e5103ee0d723d616
+    f130f934c6ef5b33e2b
 
 
 !SLIDE bullets incremental small

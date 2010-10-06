@@ -6,10 +6,10 @@
     .span-16.last= @user.email
     .span-4
       = form.label :site
-    .span-16.last= @user.site
+    .span-16.last= @user.site || 'Input something please'
     .span-4
       = form.label :salary
-    .span-16.last= @user.salary.amount
+    .span-16.last= @user.salary.amount || 'Input something please'
     .span-4
       = form.label 'User role'
     .span-16.last= @user.role.title.capitalize

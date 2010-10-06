@@ -52,7 +52,7 @@
 
 !SLIDE bullets incremental
 * *Security principles* should be applied with the same *agile* principles that **RoR** is built-on
-
+* Everyone has to knoe about this not only sys admins or senior developers, everyone
 
 !SLIDE bullets incremental
 ## Rails security ##
