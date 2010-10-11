@@ -4,6 +4,7 @@
     {"section": "intro"},
     {"section": "basic"},
     {"section": "attack"},
-    {"section": "defense"} 
+    {"section": "defense"},
+    {"section": "conclusion"} 
   ]
 }

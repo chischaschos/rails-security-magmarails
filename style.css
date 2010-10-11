@@ -32,16 +32,12 @@ h3 {
 blockquote {
   border : 2px solid #000;
   background-color: #ccc;
-  quotes: "\201C" "\201D";
+  quotes: "\201C" "\201C";
 }
 
 blockquote:before { 
   content: open-quote; 
-  font-weight: bold; 
-}
-
-blockquote:after { 
-  content: close-quote; 
-  font-weight: bold; 
-
+  font-weight: bold;
+  font-size: 150px; 
+  float: left;
 }
