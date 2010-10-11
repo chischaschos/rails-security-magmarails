@@ -50,8 +50,8 @@
 !SLIDE bullets incremental
 ### ... ###
 * RoR *built-in filter* for *special SQL characters*
- * *You get* default scaping for *’* , *"* , *NULL* character and *line breaks*
- * *By* using *Model.find(id)* or *Model.find_by_something(something)*
+ * You get default scaping for *’* , *"* , *NULL* character and *line breaks*
+ * By using *Model.find(id)* or *Model.find_by_something(something)*
 
 
 !SLIDE bullets incremental

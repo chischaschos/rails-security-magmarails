@@ -31,8 +31,8 @@
 !SLIDE bullets incremental
 ### Follow a *Fail close* approach ###
 * *Secure* system *post-failure*
-* Double cheking that your application *flow* is exactly *as want to*
-* Improves *code readibility*
+* Double checking that your application *flow* is exactly *as want to*
+* Improves *code readability*
 
 
 !SLIDE bullets incremental
@@ -65,7 +65,7 @@
 ### Prefer whitelists ###
 * There are *positive* and *negative* input validations
 * A *positive* input validates implies creating a *whitelist*
-* A *negative* input validates implies creating a *blacklist*
+* A **negative** input validates implies creating a *blacklist*
 
 
 !SLIDE bullets incremental
@@ -82,7 +82,7 @@
     @@@ ruby
     @valid_users = %w{pepe marco raul}
 
-* Think about an *list* of valid admin *user names*
+* Think about a *list* of valid admin *user names*
 * What *other* names should we add to this list?
 
 !SLIDE bullets incremental
@@ -92,7 +92,7 @@
 
 !SLIDE bullets incremental
 ### DRY ###
-* *Do not repeat yourself*
+* *Do not Repeat Yourself*
 * Focus on not **cutting pasting code**
 * Centralized security API
 

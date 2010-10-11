@@ -64,6 +64,6 @@
 
 !SLIDE bullets incremental
 ## ... ##
-* And in the end remember...
+* At the end remember...
  * Most problem domains have their *own* set of *security rules* 
  * *Beyond* what any framework can provide
