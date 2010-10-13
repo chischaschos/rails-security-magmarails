@@ -6,7 +6,7 @@
 
 
 !SLIDE bullets incremental
-## FX - Rails Authorization ##
+## FX - Broken Authentication and Session Management ##
 * I'll choose [cancan](http://github.com/ryanb/cancan)
 * > CanCan is an *authorization library* for *Ruby on Rails* which *restricts* what *resources* a given *user* is *allowed to access*. All permissions are defined in a single location (the Ability class) and not duplicated across controllers, views, and database queries. 
 
