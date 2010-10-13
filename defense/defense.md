@@ -12,7 +12,7 @@
 
 
 !SLIDE bullets incremental
-## ... ""
+## ... ##
     @@@ruby 
     class UsersController < ApplicationController
       load_and_authorize_resource
@@ -51,6 +51,17 @@
 
 
 !SLIDE bullets incremental
+## ... 
+    @@@ruby
+    class User < ActiveRecord::Base
+      attr_accessible :email, :role_id
+
+    class User < ActiveRecord::Base
+      attr_protected :role_id
+* Do you remember how we injected a *role_id* parameter?
+
+
+!SLIDE bullets incremental
 ## ... ##
 * RoR has a *built-in filter* for *special SQL characters*
  * You get default scaping for *’* , *"* , *NULL* character and *line breaks*
@@ -58,13 +69,23 @@
 
 
 !SLIDE bullets incremental
-## ... ##
+## ... #
+    @@@ruby
+    %tbody
+    - @users.each do |user|
+      %tr
+        %td= link_to user.email, user
+        %td= raw user.site
+* Using *raw* you avoid the default scaping
+
+
+!SLIDE bullets incremental
+## Be careful with **SQL Fragments** and conditions ##
     @@@ ruby
     (:conditions => "...")        #conditions
     connection.execute()          #manual statements
     Model.find_by_sql() methods   #sql fragments
-* Be careful with **SQL Fragments** and conditions
- * Specially condition fragments, where scaping has to be manually applied
+* These are special conditions, where scaping has to be manually applied
 
 
 !SLIDE bullets incremental

@@ -7,3 +7,5 @@
 !SLIDE bullets incremental
 ### Thanks ###
 * Questions?
+* [http://twitter.com/chischaschos](http://twitter.com/chischaschos)
+* emmanuel.delgado@crowdint.com
