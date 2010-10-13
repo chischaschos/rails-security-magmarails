@@ -1,16 +1,23 @@
 !SLIDE 
-.notes another dark side
 #Security in **Ruby on Rails**#
 
 
 !SLIDE bullets incremental
-## Why? ![Twitter](twitter_logo.png) ##
+## Content  ##
+* A general introduction (GI)
+* Default rules (DR)
+* Attacking a real application (AT)
+* Fixing that real application (FX)
+
+
+!SLIDE bullets incremental
+## GI - Why security? The Twitter case ##
 * ![Twitter](twitter.jpeg)
 * &lt;a href="http://x.xx/@"**[MALICIOUS_CODE]**/">http://x.xx/@"**[MALICIOUS_CODE]**/&lt;/a&gt;
 
 
 !SLIDE bullets incremental
-## Why? ##
+## GI - Why security? The Facebook case ##
 * ![Facebook](facebook_logo.jpeg)
 * Facebook scrambles to close *CSRF* hole exposing *private data*
 * Viral clickjacking *Like* **worm** hits Facebook users
@@ -18,13 +25,13 @@
 
 
 !SLIDE bullets incremental
-## Want more? ##
+## GI - Want more? ##
 * [Web Hacking Incident Database](http://projects.webappsec.org/Web-Hacking-Incident-Database)
 
 
 !SLIDE bullets incremental
-## Top 5 Attack methods ##
-* SQL Injection
+## GI - Top 5 Attack methods ##
+* Injection
 * XSS
 * Broken Authentication and Session Management
 * Insecure Direct Object References
@@ -32,38 +39,23 @@
 
 
 !SLIDE bullets incremental
+## GI - Security testing approaches ##
 * Many companies *test applications for security* with help of:
- * Black box testing
- * White box testing
- * Code reviews
+ * *Black box* testing
+ * *White box* testing
+ * *Code review*
+* And they have: big budgets, dedicated teams
 
 
 !SLIDE bullets incremental
-* And they have ...
-* Dedicated:
- * Teams
- * Budgets
-
-
-!SLIDE bullets incremental
-* Which usually means ...
- * Highly *expensive* projects with *big budgets*
-
-
-!SLIDE bullets incremental
-* *Security principles* should be applied with the same *agile* principles that **RoR** is built-on
-* Everyone has to know about this not only sys admins or senior developers, everyone
-
-!SLIDE bullets incremental
-## Rails security ##
-* **RoR** follows convention over configuration 
- * Meaning it has many *built-in* security features
-* But...
- * In order to build *secure applications* we must *use* these *built-in* features *correctlty*
- * And we need to be aware of different attack types
+## GI - How do we achieve this? ##
+* Security acknowledging everyone involved
+ * Not only sys admins or senior developers, *EVERYONE*
+* And, we need to be aware of the *different attack types*
 
 !SLIDE bullets incremental
 ## ... ##
-* At the end remember...
- * Most problem domains have their *own* set of *security rules* 
- * *Beyond* what any framework can provide
+* *Correctly* use *built-in* Rails security features
+* And, in the end, remember...
+ * The most *common problem* is that *domains* have their own set of *security rules*
+ * And they may be *beyond* what *any framework* can provide

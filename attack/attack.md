@@ -1,5 +1,12 @@
+!SLIDE bullets incremental
+## Attacking a real application ##
+* Salary manager
+* Two roles: Admin and Employee
+* Rails3
+
+
 !SLIDE bullets incremental small
-## Exploits ##
+## AT - Exploit concept ##
 * > Piece of *software*, a *chunk of data*, or *sequence of commands*
 * > that *takes advantage* of a *bug*, *glitch or vulnerability*  
 * > in order to *cause* *unintended behavior* to occur on computer software, hardware, or something electronic.
@@ -9,8 +16,14 @@
 * > Includes such things as *gaining control* of a computer system or 
 * > allowing *privilege escalation* or a *denial of service attack*.
 
-!SLIDE
-### Parameter Manipulation ##
+!SLIDE bullets incremental
+## AT - Injection *(Parameter Manipulation)* ##
+* Looking at the user acccount settings page
+* And, looking the form html
+
+
+!SLIDE bullets incremental
+## ... ##
 	@@@ html
 	<form accept-charset="UTF-8" action="/users" 
     method="post">
@@ -22,74 +35,93 @@
 	</form>
 
 
-!SLIDE full-page bullets incremental
-* Based on *RoR convetions* we may *infer a db model* something like:
-* ![http://yuml.me/7635ae77](class_diagram.png)
-
-
 !SLIDE bullets incremental
-    @@@ html
-    <select id="user_role_id" name="user[role_id]">
-* Since *user* would hold *foreign key* to *role* table
+## ... ##
+* And, based on *RoR conventions* we may *infer a db model* something like:
 
 
 !SLIDE full-page
+## ... ##
+![http://yuml.me/7635ae77](class_diagram.png)
+
+
+!SLIDE bullets incremental
+## ... ##
+* We may suppose a role field like:
+
+
+!SLIDE bullets incremental
+## ... ##
+    @@@ html
+    <select id="user_role_id" name="user[role_id]">
+* > Since a *user* would hold a *foreign key* to a *role*
+
+
+!SLIDE full-page
+## ... ##
 ![Here we see a tamper data screenshot ...](tamper1.png)
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an admin saved screenshot ...](admin_saved.png)
 
 
 !SLIDE bullets incremental
+## ... ##
 * This kind of flaw reveals a *lack of server side validations* or *defective authorization logic*
 
 
 !SLIDE bullets incremental full-page
-### SQL Injection ###
-* Consider search raises page
+## AT - Injection *(SQL)* ##
+* Consider the *"search raises"* page
 * ![Search raises](search.png)
 
 
 !SLIDE bullets incremental full-page
-### ... ###
+## ... ##
 * Look at what *address* is the *search* going through ...
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1000.00**
 * *Testing the waters*
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1'**
 
 
-!SLIDE full-page
+!SLIDE bullets incremental full-page
+## ... ##
 ![Here we see an admits injection screenshot ...](admits_injection.png)
 
 
 !SLIDE bullets incremental
-* Lets modify the query string
+## ... ##
+* And now, I'll modify the query string
 * http://localhost:3000/raises/search?utf8=%E2%9C%93&search_raise=**1+OR+1%3D1**
 * *Surprise!*
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an succesful attack screen ...](raises1.png)
 
 
 !SLIDE bullets incremental
-### Broken Authorization ###
+## AT - Broken Authorization ##
 * *Parts/resouces* of our application are usually *restricted* to different *users*
 * Some times *logic behind* access is *flawed*
 
 
 !SLIDE bullets incremental
+## ... ##
 * Following with our previous example on a security flaw
-* Are we able to *delete* someone else *raise petition*?
+* Are we able to *delete* someone else's *raise petition*?
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an succesful attack screen ...](raises2.png)
 
 
 !SLIDE bullets incremental small
-### Cross-Site Scripting ###
+## AT - Cross-Site Scripting ##
 * > Type of computer security *vulnerability* typically found in *web* applications 
 * > that *enables* malicious attackers to *inject client-side script* into web pages viewed by other users.
 
@@ -108,18 +140,28 @@
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an succesful attack screen ...](xss1.png)
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an succesful attack screen ...](xss2.png)
 
 
 !SLIDE full-page
+## ... ##
 ![Here we see an succesful attack screen ...](xss3.png)
 
 
+!SLIDE bullets incremental small
+## AT - Cross-Site Request Forgery ##
+* > Also known as a *one-click attack* or *session riding* and abbreviated as CSRF or XSRF
+* > Type of *malicious exploit* of a website whereby *unauthorized commands* are *transmitted from* a user that the *website trusts*.
+
+
 !SLIDE small
+## ... ##
     @@@ html
     <tr>
       <td><a href="/users/2">poor@test.com</a></td>
@@ -154,12 +196,7 @@
     f130f934c6ef5b33e2b
 
 
-!SLIDE bullets incremental small
-### Cross-Site Request Forgery ###
-* > Also known as a *one-click attack* or *session riding* and abbreviated as CSRF or XSRF
-* > Type of *malicious exploit* of a website whereby *unauthorized commands* are *transmitted from* a user that the *website trusts*.
-
 !SLIDE bullets incremental
-### XSS vs CSRF ###
-* *XSS* exploits the trust a *client* has *for* a *site*
+## AT - XSS vs CSRF ##
+* *XSS* exploits the trust a *client* has for a *site*
 * *CSRF* exploits the trust a *site* has for a *client*

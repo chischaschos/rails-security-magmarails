@@ -1,17 +1,18 @@
 !SLIDE bullets incremental
-## Fixing exploits ##
-* Lets look for already built tools
- * [Ruby Toolbox](http://ruby-toolbox.com/)
+## Fixing that real application ##
+* [Ruby Toolbox](http://ruby-toolbox.com/)
+* [Rails Guides Security](http://guides.rubyonrails.org/security.html)
 * And we'll look at what Rails offers us
 
 
 !SLIDE bullets incremental
-### Rails Authorization ###
+## FX - Rails Authorization ##
 * I'll choose [cancan](http://github.com/ryanb/cancan)
 * > CanCan is an *authorization library* for *Ruby on Rails* which *restricts* what *resources* a given *user* is *allowed to access*. All permissions are defined in a single location (the Ability class) and not duplicated across controllers, views, and database queries. 
 
 
 !SLIDE bullets incremental
+## ... ""
     @@@ruby 
     class UsersController < ApplicationController
       load_and_authorize_resource
@@ -20,6 +21,7 @@
 
 
 !SLIDE 
+## ... ##
     @@@ruby 
     class Ability
       include CanCan::Ability
@@ -37,25 +39,26 @@
 
 
 !SLIDE
+## ... ##
     @@@ruby
     @users = User.accessible_by(current_ability)
 
 
 !SLIDE bullets incremental
-### XSS and Injection ###
+## FX - XSS and Injection ##
 * Rails adds XSS protection by default in Rails3
  * [SafeBuffers and Rails3.0](http://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/)
 
 
 !SLIDE bullets incremental
-### ... ###
-* RoR *built-in filter* for *special SQL characters*
+## ... ##
+* RoR has a *built-in filter* for *special SQL characters*
  * You get default scaping for *’* , *"* , *NULL* character and *line breaks*
  * By using *Model.find(id)* or *Model.find_by_something(something)*
 
 
 !SLIDE bullets incremental
-### ... ###
+## ... ##
     @@@ ruby
     (:conditions => "...")        #conditions
     connection.execute()          #manual statements
@@ -65,7 +68,7 @@
 
 
 !SLIDE bullets incremental
-### Encouraged finders ###
+## FX - Encouraged finders ##
     @@@ruby
     Model.find(:first, 
       :conditions => ["login = ? AND password = ?", 
@@ -79,7 +82,7 @@
 
 
 !SLIDE
-## **Discouraged** ##
+### **Discouraged** ###
     @@@ ruby
     whereClause = "user_id = #{current_user.id}" 
     whereClause << " and request_amount ="
@@ -88,7 +91,7 @@
 
 
 !SLIDE
-## *Recommended* ##
+### *Recommended* ###
     @@@ ruby
     whereClause = 'user_id = ? and request_amount = ?'
     @raises = Raise.where([whereClause, current_user, 
@@ -113,7 +116,7 @@
 
 
 !SLIDE bullets incremental
-### HTTPOnly ###
+## FX - HTTPOnly ##
     @@@ruby
     SalaryManager::Application.config.session_store 
       :cookie_store, :key => '_acl_test_session', 
